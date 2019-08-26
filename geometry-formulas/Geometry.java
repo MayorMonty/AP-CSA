@@ -30,8 +30,90 @@ public class Geometry {
         return area;
     }
 
+    /**
+     * Computes the hypotenuse of the triangle given its legs
+     *
+     * @param a one side of triangle
+     * @param b one side of triangle
+     * @return hypotenuse of the triangle
+     */
+    public static double triangleHypotenuse(double a, double b) {
+        return Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
+    }
+
+    /**
+     * Computes area of a trapezoid
+     * 
+     * @param majorBase Longer base
+     * @param minorBase Thinner base
+     * @param height    Height of trapezoid
+     * @return Area of trapezoid
+     */
+    public static double trapezoidArea(double majorBase, double minorBase, double height) {
+        return height * (majorBase + minorBase) / 2.0;
+    }
+
+    /**
+     * Computes the volume of a sphere
+     * 
+     * @param radius radius of sphere
+     * @return Area of sphere
+     */
     public static double sphereVolume(double radius) {
         return 4.0 / 3.0 * Math.PI * Math.pow(radius, 3);
+    }
+
+    /**
+     * Computes the surface area of a sphere
+     * 
+     * @param radius radius of sphere
+     * @return Surface Area of sphere
+     */
+    public static double sphereSurfaceArea(double radius) {
+        return 4.0 * Math.PI * Math.pow(radius, 2);
+    }
+
+    /**
+     * Computes the volume of a Rectangular Prism
+     * 
+     * @param length length
+     * @param width  width
+     * @param height Height of Rectangular Prism
+     * @return Area of Rectangular Prism
+     */
+    public static double rectangularPrismVolume(double length, double width, double height) {
+        return length * width * height;
+    }
+
+    /**
+     * Computes the surface area of a Rectangular Prism
+     * 
+     * @param length length
+     * @param width  width
+     * @param height Height of Rectangular Prism
+     * @return Area of Rectangular Prism
+     */
+    public static double rectangularPrismSurfaceArea(double length, double width, double height) {
+        return 2.0 * (width * length + height * length + height * width);
+    }
+
+    /**
+     * Calculates the area of a cone.
+     *
+     * @param radius radius of base of cone
+     * @param height height of the cone
+     * @return area of the cone
+     */
+    public static double coneVolume(double radius, double height) {
+        return height / 3.0 * Math.PI * Math.pow(radius, 2);
+    }
+
+    public static double pointDistance(double x1, double y1, double x2, double y2) {
+        return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+    }
+
+    public static double pointSlope(double x1, double y1, double x2, double y2) {
+        return (y2 - y1) / (x2 - x1);
     }
 
     public static void main(String[] args) {
@@ -43,5 +125,6 @@ public class Geometry {
 
         double ra1 = parallelogramArea(5.2, 9.3);
         System.out.println(ra1);
+
     }
 }
