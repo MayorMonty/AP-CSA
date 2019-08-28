@@ -108,10 +108,28 @@ public class Geometry {
         return height / 3.0 * Math.PI * Math.pow(radius, 2);
     }
 
+    /**
+     * Computes distance between two points
+     * 
+     * @param x1 x parameter of 1st point
+     * @param y1 y parameter of 1nd point
+     * @param x2 x parameter of 2nd point
+     * @param y2 y parameter of 2nd point
+     * @return
+     */
     public static double pointDistance(double x1, double y1, double x2, double y2) {
         return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
     }
 
+    /**
+     * Computes the slope of the secant line of two points
+     * 
+     * @param x1 x parameter of 1st point
+     * @param y1 y parameter of 1nd point
+     * @param x2 x parameter of 2nd point
+     * @param y2 y parameter of 2nd point
+     * @return
+     */
     public static double pointSlope(double x1, double y1, double x2, double y2) {
         return (y2 - y1) / (x2 - x1);
     }
