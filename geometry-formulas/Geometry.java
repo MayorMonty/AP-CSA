@@ -2,8 +2,8 @@
  * Here are some useful Geometry formulas to demonstrate how functions can
  * return values. Also look at the Java Docs.
  * 
- * @author (your name)
- * @version (a version number or a date)
+ * @author Brendan McGuire
+ * @version 27 Aug 2019
  */
 public class Geometry {
     /**
