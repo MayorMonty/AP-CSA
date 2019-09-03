@@ -14,15 +14,15 @@ public class Rover {
     static List<Rover> registry;
 
     // Private Instance Variables
-    private int x;
-    private int y;
-    private int rotation;
+    private double x;
+    private double y;
+    private double rotation;
 
     private int health;
     private int damageWhenHit;
     private int ammo;
 
-    public Rover(int x, int y, int health, int damageWhenHit, int ammo) {
+    public Rover(double x, double y, double rotation, int health, int damageWhenHit, int ammo) {
         this.x = x;
         this.y = y;
         this.health = health;
@@ -54,16 +54,16 @@ public class Rover {
     }
 
     private static class Position {
-        int x;
-        int y;
-        int rotation;
+        double x;
+        double y;
+        double rotation;
 
-        Position(int x, int y) {
+        Position(double x, double y) {
             this.x = x;
             this.y = y;
         }
 
-        Position(int x, int y, int rotation) {
+        Position(double x, double y, double rotation) {
             this.x = x;
             this.y = y;
             this.rotation = rotation;
@@ -91,6 +91,7 @@ public class Rover {
     /**
      * Fires at a certain xy position (ignores rotation)
      * 
+     * @param Position target to fire at
      * @return boolean Whether you hit anything (alive)
      */
     public boolean fire(Position target) {
@@ -113,7 +114,15 @@ public class Rover {
 
     };
 
+    /**
+     * Drives the robot forward. Note that since the rover is not omnidirectional,
+     * this merely moves the rover in the direction that it is pointing
+     * 
+     * @param amount
+     */
     public void drive(int amount) {
+
+        Math.sin()
 
     };
 
