@@ -14,17 +14,35 @@ public class Rover {
     static List<Rover> registry;
 
     // Private Instance Variables
-    private double x;
-    private double y;
-    private double rotation;
+    private static class Position {
+        double x;
+        double y;
+        double rotation;
+
+        boolean is(Position compare) {
+            return x == compare.x && y == compare.y;
+        }
+
+        Position(double x, double y) {
+            this.x = x;
+            this.y = y;
+        }
+
+        Position(double x, double y, double rotation) {
+            this.x = x;
+            this.y = y;
+            this.rotation = rotation;
+        }
+    }
+
+    private Position position;
 
     private int health;
     private int damageWhenHit;
     private int ammo;
 
     public Rover(double x, double y, double rotation, int health, int damageWhenHit, int ammo) {
-        this.x = x;
-        this.y = y;
+        this.position = new Position(x, y);
         this.health = health;
         this.ammo = ammo;
         this.damageWhenHit = damageWhenHit;
@@ -53,30 +71,13 @@ public class Rover {
         return health;
     }
 
-    private static class Position {
-        double x;
-        double y;
-        double rotation;
-
-        Position(double x, double y) {
-            this.x = x;
-            this.y = y;
-        }
-
-        Position(double x, double y, double rotation) {
-            this.x = x;
-            this.y = y;
-            this.rotation = rotation;
-        }
-    }
-
     /**
      * Gets the current position
      * 
      * @return Position current position
      */
     public Position position() {
-        return new Position(x, y, rotation);
+        return position;
     }
 
     /**
@@ -101,7 +102,7 @@ public class Rover {
         Rover.registry.forEach(rover -> {
 
             // See if the shot matters
-            boolean hit = rover.x == target.x && rover.y == target.y && rover.alive();
+            boolean hit = rover.position.is(target) && rover.alive();
 
             if (hit) {
                 rover.hit();
@@ -121,8 +122,8 @@ public class Rover {
      * @param amount
      */
     public void drive(int amount) {
-
-        Math.sin()
+        double deltaX = amount * Math.cos(position.rotation);
+        double deltaY = amount * Math.sin(position.rotation);
 
     };
 
