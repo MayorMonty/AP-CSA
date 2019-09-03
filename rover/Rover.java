@@ -17,7 +17,7 @@ public class Rover {
     private static class Position {
         double x;
         double y;
-        double rotation;
+        double rotation; // Angle in radians (0 deg is facing right)
 
         boolean is(Position compare) {
             return x == compare.x && y == compare.y;
@@ -125,6 +125,24 @@ public class Rover {
         double deltaX = amount * Math.cos(position.rotation);
         double deltaY = amount * Math.sin(position.rotation);
 
+        position.x += deltaX;
+        position.y += deltaY;
     };
+
+    /**
+     * Rotates the robot a specific amount
+     */
+    public void rotate(double amount) {
+        position.rotation += amount;
+
+        // Normalize the angle
+        if (position.rotation > 2 * Math.PI) {
+            position.rotation -= 2.0 * Math.PI;
+        }
+
+        if (position.rotation < 0) {
+            position.rotation += 2.0 * Math.PI;
+        }
+    }
 
 }
