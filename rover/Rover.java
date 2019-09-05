@@ -38,14 +38,20 @@ public class Rover {
     private Position position;
 
     private int health;
+    private int maxHealth;
     private int damageWhenHit;
     private int ammo;
+    private int energy;
+    private int maxEnergy;
 
-    public Rover(double x, double y, double rotation, int health, int damageWhenHit, int ammo) {
+    public Rover(double x, double y, double rotation, int health, int damageWhenHit, int ammo, int energy) {
         this.position = new Position(x, y);
         this.health = health;
+        this.maxHealth = health;
         this.ammo = ammo;
         this.damageWhenHit = damageWhenHit;
+        this.energy = energy;
+        this.maxEnergy = energy;
 
         // Add to registry
         Rover.registry.add(this);
@@ -59,7 +65,7 @@ public class Rover {
      * @return boolean Whether the rover is alive or not
      */
     public boolean alive() {
-        return health > 0;
+        return health > 0 && energy > 0;
     }
 
     /**
@@ -97,6 +103,17 @@ public class Rover {
      */
     public boolean fire(Position target) {
 
+        if (!alive()) {
+            throw new Exception("Robot cannot fire while dead");
+            return false;
+        }
+
+        // Move the robot the max it can with it's given energy
+        if (energy < 20) {
+            throw new Exception("Not enough energy to fire");
+            return false;
+        }
+
         boolean didHit = false;
 
         Rover.registry.forEach(rover -> {
@@ -111,6 +128,9 @@ public class Rover {
 
         });
 
+        energy -= 20;
+        ammo -= 1;
+
         return didHit;
 
     };
@@ -122,17 +142,57 @@ public class Rover {
      * @param amount
      */
     public void drive(int amount) {
+
+        if (!alive()) {
+            throw new Exception("Robot cannot move while dead");
+            return;
+        }
+
+        // Move the robot the max it can with it's given energy
+        if (energy < amount) {
+            amount = Math.max(energy, 0);
+        }
+
         double deltaX = amount * Math.cos(position.rotation);
         double deltaY = amount * Math.sin(position.rotation);
 
         position.x += deltaX;
         position.y += deltaY;
+
+        energy -= amount;
     };
 
     /**
-     * Rotates the robot a specific amount
+     * Turns to face a specific point
+     * 
+     * @param position The (x, y) coordinate to face (ignores any specified
+     *                 rotation)
      */
-    public void rotate(double amount) {
+    public boolean turnToFace(Position target) {
+
+        // Construct legs of triangle
+        double deltaX = target.x - position.x;
+        double deltaY = target.y - position.y;
+
+    }
+
+    /**
+     * Rotates the robot a specific amount
+     * 
+     * @param amount Amount to rotate (in radians)
+     */
+    public void turn(double amount) {
+
+        if (!alive()) {
+            throw new Exception("Robot cannot move while dead");
+            return;
+        }
+
+        // Move the robot the max it can with it's given energy
+        if (energy < amount) {
+            amount = Math.max(energy, 0);
+        }
+
         position.rotation += amount;
 
         // Normalize the angle
@@ -143,6 +203,42 @@ public class Rover {
         if (position.rotation < 0) {
             position.rotation += 2.0 * Math.PI;
         }
+
+        energy -= amount;
     }
+
+    /**
+     * Uses energy to repair bot
+     * 
+     * @param amount The amount of energy to consume to repair bot
+     */
+    public boolean repair(int amount) {
+
+        if (amount > energy) {
+            throw new Exception("Cannot repair more than current energy");
+            return false;
+        }
+
+        health = Math.min(amount + health, maxHealth);
+        energy -= amount;
+
+        return true;
+
+    }
+
+    /**
+     * Charges bot
+     * 
+     * @param amount Amount to charge the bot
+     */
+    public void charge(int amount) {
+
+        if (health <= 0) {
+            throw new Exception("Robot cannot charge while dead");
+            return;
+        }
+
+        energy = Math.min(amount + energy, maxEnergy);
+    };
 
 }
