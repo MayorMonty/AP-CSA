@@ -1,3 +1,4 @@
+package rover;
 
 /**
  * Rover simulation game.
@@ -23,6 +24,10 @@ public class Rover {
             return x == compare.x && y == compare.y;
         }
 
+        double distance(Position compare) {
+            return Math.sqrt(Math.pow((y - compare.y), 2) + Math.pow((x - compare.x), 2));
+        }
+
         Position(double x, double y) {
             this.x = x;
             this.y = y;
@@ -36,6 +41,7 @@ public class Rover {
     }
 
     private Position position;
+    private Position start;
 
     private int health;
     private int maxHealth;
@@ -46,6 +52,8 @@ public class Rover {
 
     public Rover(double x, double y, double rotation, int health, int damageWhenHit, int ammo, int energy) {
         this.position = new Position(x, y);
+        this.start = new Position(x, y);
+
         this.health = health;
         this.maxHealth = health;
         this.ammo = ammo;
@@ -104,20 +112,17 @@ public class Rover {
     public boolean fire(Position target) {
 
         if (!alive()) {
-            throw new Exception("Robot cannot fire while dead");
             return false;
         }
 
         // Move the robot the max it can with it's given energy
         if (energy < 20) {
-            throw new Exception("Not enough energy to fire");
             return false;
         }
 
         boolean didHit = false;
 
-        Rover.registry.forEach(rover -> {
-
+        for (Rover rover : Rover.registry) {
             // See if the shot matters
             boolean hit = rover.position.is(target) && rover.alive();
 
@@ -125,8 +130,7 @@ public class Rover {
                 rover.hit();
                 didHit = true;
             }
-
-        });
+        }
 
         energy -= 20;
         ammo -= 1;
@@ -141,11 +145,10 @@ public class Rover {
      * 
      * @param amount
      */
-    public void drive(int amount) {
+    public boolean drive(double amount) {
 
         if (!alive()) {
-            throw new Exception("Robot cannot move while dead");
-            return;
+            return false;
         }
 
         // Move the robot the max it can with it's given energy
@@ -160,6 +163,8 @@ public class Rover {
         position.y += deltaY;
 
         energy -= amount;
+
+        return true;
     };
 
     /**
@@ -174,6 +179,7 @@ public class Rover {
         double deltaX = target.x - position.x;
         double deltaY = target.y - position.y;
 
+        return turn(Math.atan(deltaY / deltaX));
     }
 
     /**
@@ -181,16 +187,16 @@ public class Rover {
      * 
      * @param amount Amount to rotate (in radians)
      */
-    public void turn(double amount) {
+    public boolean turn(double amount) {
 
         if (!alive()) {
-            throw new Exception("Robot cannot move while dead");
-            return;
+            return false;
         }
 
         // Move the robot the max it can with it's given energy
         if (energy < amount) {
             amount = Math.max(energy, 0);
+            return false;
         }
 
         position.rotation += amount;
@@ -205,6 +211,17 @@ public class Rover {
         }
 
         energy -= amount;
+        return true;
+    }
+
+    public boolean moveTo(Position target) {
+        turnToFace(position);
+        return drive(position.distance(target));
+
+    }
+
+    public boolean goHome() {
+        return moveTo(this.start);
     }
 
     /**
@@ -215,7 +232,6 @@ public class Rover {
     public boolean repair(int amount) {
 
         if (amount > energy) {
-            throw new Exception("Cannot repair more than current energy");
             return false;
         }
 
@@ -234,7 +250,6 @@ public class Rover {
     public void charge(int amount) {
 
         if (health <= 0) {
-            throw new Exception("Robot cannot charge while dead");
             return;
         }
 
