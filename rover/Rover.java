@@ -1,4 +1,3 @@
-package rover;
 
 /**
  * Rover simulation game.
@@ -8,14 +7,15 @@ package rover;
  */
 
 import java.util.List;
+import java.util.ArrayList;
 
 public class Rover {
 
     // Keeps track of all rovers
-    static List<Rover> registry;
+    static List<Rover> registry = new ArrayList<Rover>();
 
     // Private Instance Variables
-    private static class Position {
+    public static class Position {
         double x;
         double y;
         double rotation; // Angle in radians (0 deg is facing right)
@@ -77,12 +77,48 @@ public class Rover {
     }
 
     /**
+     * Gets the rover's ammo
+     * 
+     * @return int
+     */
+    public int ammo() {
+        return ammo;
+    }
+
+    /**
      * Gets the rover's health
      * 
      * @return int
      */
     public int health() {
         return health;
+    }
+
+    /**
+     * Gets the rover's energy
+     * 
+     * @return int
+     */
+    public int energy() {
+        return health;
+    }
+
+    /**
+     * Gets the rover's maxHealth
+     * 
+     * @return int
+     */
+    public int maxHealth() {
+        return maxHealth;
+    }
+
+    /**
+     * Gets the rover's maxEnergy
+     * 
+     * @return int
+     */
+    public int maxEnergy() {
+        return maxEnergy;
     }
 
     /**
