@@ -20,7 +20,7 @@ public class Rover {
         double y;
         double rotation; // Angle in radians (0 deg is facing right)
 
-        boolean is(Position compare) {
+        boolean equals(Position compare) {
             return x == compare.x && y == compare.y;
         }
 
@@ -160,7 +160,7 @@ public class Rover {
 
         for (Rover rover : Rover.registry) {
             // See if the shot matters
-            boolean hit = rover.position.is(target) && rover.alive();
+            boolean hit = rover.position.equals(target) && rover.alive();
 
             if (hit) {
                 rover.hit();
