@@ -8,7 +8,11 @@ import java.util.Random;
 public class Main {
 
     private static void pause() {
-        Thread.sleep(2000);
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            // No-op
+        }
     }
 
     public static void main(String[] args) {
@@ -27,7 +31,7 @@ public class Main {
             // Perform actions
             switch (in.toUpperCase()) {
 
-            case "CHARGE":
+            case "CHARGE": {
                 System.out.println("CHARGING...");
                 int amount = random.nextInt((10 - 1) + 2) + 2;
 
@@ -35,14 +39,63 @@ public class Main {
                 System.out.printf("%d ENERGY COLLECTED\n", amount);
                 break;
 
-            case "REPAIR":
+            }
+
+            case "REPAIR": {
                 System.out.println("REPARING...");
                 int toRepair = Math.min(rover.maxHealth() - rover.health(), rover.energy());
 
                 rover.repair(toRepair);
                 System.out.printf("%d DAMAGE REPAIRED\n", toRepair);
+                break;
+            }
+
+            case "TURN": {
+                System.out.printf("How much? (in radians)");
+                double theta = stdin.nextDouble();
+
+                if (rover.turn(theta)) {
+                    System.out.println("Turned successfully");
+                } else {
+                    System.out.println("Failed to turn succesfully");
+                }
 
                 break;
+            }
+
+            case "MOVE": {
+                System.out.printf("X: ");
+                double x = stdin.nextDouble();
+
+                System.out.printf("Y: ");
+                double y = stdin.nextDouble();
+
+                System.out.printf("Angle: ");
+                double angle = stdin.nextDouble();
+
+                Rover.Position target = new Rover.Position(x, y, angle);
+
+                if (rover.moveTo(target)) {
+                    System.out.println("Done");
+                } else {
+                    System.out.println("Could not reach destination");
+                }
+
+                break;
+            }
+
+            case "GOTO": {
+                System.out.printf("How far? ");
+                double distance = stdin.nextDouble();
+
+                if (rover.drive(distance)) {
+                    System.out.println("Done");
+                } else {
+                    System.out.println("Could not reach destination");
+                }
+
+                break;
+            }
 
             }
 
