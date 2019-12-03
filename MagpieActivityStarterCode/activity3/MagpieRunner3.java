@@ -11,8 +11,7 @@ public class MagpieRunner3 {
 	/**
 	 * Create a Magpie, give it user input, and print its replies.
 	 */
-	public static void main(String[] args)
-	{
+	public static void main(String[] args) {
 		Magpie2 maggie = new Magpie2();
 
 		System.out.println(maggie.getGreeting());
@@ -27,5 +26,6 @@ public class MagpieRunner3 {
 		}
 
 		in.close();
+	}
 
 }
