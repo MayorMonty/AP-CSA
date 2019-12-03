@@ -24,6 +24,8 @@ public class MagpieRunner2 {
 			System.out.print("> ");
 			statement = in.nextLine();
 		}
+
+		in.close();
 	}
 
 }
