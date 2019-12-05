@@ -31,9 +31,9 @@ public class Magpie3 {
 
 		if (findKeyword(statement, "I want") >= 0) {
 			int pos = findKeyword(statement, "I want");
-			String thing = statement.substring(pos, statement.indexOf(" ", pos));
+			String thing = statement.substring(pos + 7);
 
-			return "Would you really be hapy if you had " + thing + "?";
+			return "Would you really be happy if you had " + thing + "?";
 
 		}
 
