@@ -75,6 +75,8 @@ public class Magpie3 {
 		// the line below
 		int psn = phrase.toLowerCase().indexOf(goal.toLowerCase(), startPos);
 
+		int i = 0;
+
 		// Refinement--make sure the goal isn't part of a
 		// word
 		while (psn >= 0) {
@@ -87,6 +89,8 @@ public class Magpie3 {
 			if (psn + goal.length() < phrase.length()) {
 				after = phrase.substring(psn + goal.length(), psn + goal.length() + 1).toLowerCase();
 			}
+
+			System.out.println("" + i++ + " " + psn + " " + before.codePointAt(0) + " " + after.codePointAt(0));
 
 			// If before and after aren't letters, we've
 			// found the word
@@ -103,6 +107,19 @@ public class Magpie3 {
 		}
 
 		return -1;
+	}
+
+	public void findKeywordTest() {
+
+		findKeyword("She's my sister", "sister", 0);
+		System.out.println("---");
+		findKeyword("Brother Tom is helpful", "brother", 0);
+		System.out.println("---");
+		findKeyword("I can't catch wild cats.", "cat", 0);
+		System.out.println("---");
+		findKeyword("I know nothing about snow plows.", "no", 0);
+		System.out.println("---");
+
 	}
 
 	/**

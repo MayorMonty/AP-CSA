@@ -14,18 +14,20 @@ public class MagpieRunner3 {
 	public static void main(String[] args) {
 		Magpie3 maggie = new Magpie3();
 
-		System.out.println(maggie.getGreeting());
-		Scanner in = new Scanner(System.in);
-		System.out.print("> ");
-		String statement = in.nextLine();
+		maggie.findKeywordTest();
 
-		while (!statement.equals("Bye")) {
-			System.out.println(maggie.getResponse(statement));
-			System.out.print("> ");
-			statement = in.nextLine();
-		}
+		// System.out.println(maggie.getGreeting());
+		// Scanner in = new Scanner(System.in);
+		// System.out.print("> ");
+		// String statement = in.nextLine();
 
-		in.close();
+		// while (!statement.equals("Bye")) {
+		// System.out.println(maggie.getResponse(statement));
+		// System.out.print("> ");
+		// statement = in.nextLine();
+		// }
+
+		// in.close();
 	}
 
 }
