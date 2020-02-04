@@ -1,0 +1,10 @@
+Inital Contents:
+Chocolate Chip x10
+Brownie x16
+Shortbread x14
+Walnut x12
+
+'Chocolate Chip' Removed:
+Brownie x16
+Shortbread x14
+Walnut x12
