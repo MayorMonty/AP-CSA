@@ -1,8 +1,8 @@
-import java.util.List;
+import java.util.ArrayList;
 
 public class MasterOrder {
 
-    private List<CookieOrder> orders;
+    private ArrayList<CookieOrder> orders;
 
     public MasterOrder() {
         orders = new ArrayList<CookieOrder>();
@@ -25,7 +25,8 @@ public class MasterOrder {
     public int removeVariety(String variety) {
         int removed = 0;
 
-        for (CookieOrder order : orders) {
+        for (int i = 0; i < orders.size(); i++) {
+            CookieOrder order = orders.get(i);
             if (order.getVariety().equals(variety)) {
                 orders.remove(order);
                 removed += order.getNumBoxes();
@@ -33,6 +34,14 @@ public class MasterOrder {
         }
 
         return removed;
+
+    }
+
+    public void showOrder() {
+
+        for (CookieOrder order : orders) {
+            System.out.println(order.getVariety() + " x" + order.getNumBoxes());
+        }
 
     }
 
