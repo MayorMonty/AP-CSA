@@ -13,7 +13,7 @@ public class Runner {
         orders.showOrder();
 
         orders.removeVariety("Chocolate Chip");
-        System.out.println("'Chocolate Chip' Removed:");
+        System.out.println("\n'Chocolate Chip' Removed:");
         orders.showOrder();
     }
 
