@@ -1,0 +1,48 @@
+new Digit(3) = [3]
+(Strictly Increasing)
+
+new Digit(21345) = [5, 4, 3, 1, 2]
+(Not Strictly Increasing)
+
+new Digit(585858867) = [7, 6, 8, 8, 5, 8, 5, 8, 5]
+(Not Strictly Increasing)
+
+new Digit(0) = [0]
+(Strictly Increasing)
+
+new Digit(27373) = [3, 7, 3, 7, 2]
+(Not Strictly Increasing)
+
+new Digit(121) = [1, 2, 1]
+(Not Strictly Increasing)
+
+new Digit(123456789) = [9, 8, 7, 6, 5, 4, 3, 2, 1]
+(Not Strictly Increasing)
+
+new Digit(34567) = [7, 6, 5, 4, 3]
+(Not Strictly Increasing)
+mcguire@air APCSA % cd /Users/mcguire/Documents/APCSA ; /Library/Java/JavaVirtualMachines/jdk-12.0.2.jdk/Contents/Home/bin/java -Dfile.encoding=UTF-8 -cp "/Users/mcguire/Library/Application Support/Code/User/workspaceStorage/687f4e550f127279eaa93458916353a5/redhat.java/jdt_ws/APCSA_fa4dacde/bin" DigitsRunner
+
+new Digit(3) = [3]
+(Strictly Increasing)
+
+new Digit(21345) = [2, 1, 3, 4, 5]
+(Not Strictly Increasing)
+
+new Digit(585858867) = [5, 8, 5, 8, 5, 8, 8, 6, 7]
+(Not Strictly Increasing)
+
+new Digit(0) = [0]
+(Strictly Increasing)
+
+new Digit(27373) = [2, 7, 3, 7, 3]
+(Not Strictly Increasing)
+
+new Digit(121) = [1, 2, 1]
+(Not Strictly Increasing)
+
+new Digit(123456789) = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+(Strictly Increasing)
+
+new Digit(34567) = [3, 4, 5, 6, 7]
+(Strictly Increasing)    
